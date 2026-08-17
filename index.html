@@ -1,486 +1,118 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JARVIS AI</title>
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Ajudante</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="app">
+    <main class="app">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
+        <!-- CABEÇALHO -->
 
-            <div class="logo">
-                <div class="logo-core"></div>
-                <span>JARVIS</span>
-            </div>
+        <header class="header">
 
-            <nav>
-                <button class="nav-item active" data-page="dashboard">
-                    <span>⌂</span>
-                    Dashboard
-                </button>
+            <div class="brand">
 
-                <button class="nav-item" data-page="tasks">
-                    <span>✓</span>
-                    Tarefas
-                </button>
-
-                <button class="nav-item" data-page="notes">
-                    <span>▤</span>
-                    Notas
-                </button>
-
-                <button class="nav-item" data-page="calendar">
-                    <span>◫</span>
-                    Agenda
-                </button>
-
-                <button class="nav-item" data-page="workout">
-                    <span>♜</span>
-                    Treinos
-                </button>
-
-                <button class="nav-item" data-page="memory">
-                    <span>◉</span>
-                    Memória
-                </button>
-
-                <button class="nav-item" data-page="system">
-                    <span>⚙</span>
-                    Sistema
-                </button>
-            </nav>
-
-            <div class="sidebar-bottom">
-                <button class="nav-item" data-page="settings">
-                    <span>⚙</span>
-                    Configurações
-                </button>
-            </div>
-
-        </aside>
-
-
-        <!-- MAIN -->
-        <main class="main">
-
-            <!-- HEADER -->
-            <header class="header">
+                <div class="status-orb"></div>
 
                 <div>
-                    <h1 id="page-title">Dashboard</h1>
-                    <p id="system-status">
-                        Sistema operacional
-                    </p>
+                    <h1>AJUDANTE</h1>
+                    <span id="status">ONLINE</span>
                 </div>
 
-                <div class="header-right">
+            </div>
 
-                    <div class="clock">
-                        <span id="time">00:00:00</span>
-                        <small id="date">00/00/0000</small>
-                    </div>
+            <div class="clock" id="clock">
+                00:00
+            </div>
 
-                    <div class="status">
-                        <span class="status-dot"></span>
-                        ONLINE
-                    </div>
+        </header>
 
+
+        <!-- ÁREA DA CONVERSA -->
+
+        <section class="conversation" id="conversation">
+
+            <div class="message assistant">
+
+                <div class="message-name">
+                    AJUDANTE
                 </div>
 
-            </header>
+                <p>
+                    Olá. Estou pronto para conversar com você.
+                </p>
 
+                <span class="message-time">
+                    agora
+                </span>
 
-            <!-- DASHBOARD -->
-            <section id="dashboard" class="page active-page">
+            </div>
 
-                <div class="welcome">
-                    <div>
-                        <span class="small-label">ASSISTENTE PESSOAL</span>
-                        <h2>Olá. Estou pronto.</h2>
-                        <p>
-                            Como posso ajudá-lo hoje?
-                        </p>
-                    </div>
-                </div>
+        </section>
 
 
-                <!-- JARVIS CORE -->
-                <div class="jarvis-container">
+        <!-- ÁREA DE COMANDO -->
 
-                    <div class="core-ring ring-1"></div>
-                    <div class="core-ring ring-2"></div>
-                    <div class="core-ring ring-3"></div>
+        <section class="input-area">
 
-                    <div class="core">
-                        <div class="core-inner"></div>
-                    </div>
+            <button
+                class="icon-button"
+                id="microphone"
+                title="Microfone">
 
-                    <div id="jarvis-state">
-                        STANDBY
-                    </div>
+                🎙
 
-                </div>
+            </button>
 
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Fale comigo..."
+                autocomplete="off"
+            >
 
-                <!-- COMMAND -->
-                <div class="command-box">
+            <button
+                class="send-button"
+                id="sendButton">
 
-                    <input
-                        type="text"
-                        id="commandInput"
-                        placeholder="Digite um comando para o JARVIS..."
-                        autocomplete="off"
-                    >
+                ➤
 
-                    <button id="micButton" title="Microfone">
-                        🎙
-                    </button>
+            </button>
 
-                    <button id="sendButton">
-                        ENVIAR
-                    </button>
-
-                </div>
-
-
-                <!-- CHAT -->
-                <div class="chat" id="chat">
-
-                    <div class="message jarvis-message">
-
-                        <div class="message-label">
-                            JARVIS
-                        </div>
-
-                        <p>
-                            Sistema iniciado. Estou aguardando seu comando.
-                        </p>
+        </section>
 
-                        <span class="message-time">
-                            agora
-                        </span>
 
-                    </div>
+        <!-- STATUS -->
 
-                </div>
+        <footer class="footer">
 
+            <span>
+                SISTEMA
+            </span>
 
-                <!-- CARDS -->
-                <div class="cards">
+            <span id="systemStatus">
+                Aguardando comando
+            </span>
 
-                    <div class="card">
-                        <span class="card-icon">✓</span>
-                        <div>
-                            <small>TAREFAS</small>
-                            <strong id="taskCount">3</strong>
-                            <p>pendentes</p>
-                        </div>
-                    </div>
+        </footer>
 
-                    <div class="card">
-                        <span class="card-icon">◫</span>
-                        <div>
-                            <small>AGENDA</small>
-                            <strong>2</strong>
-                            <p>eventos hoje</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <span class="card-icon">♜</span>
-                        <div>
-                            <small>TREINO</small>
-                            <strong>FORÇA</strong>
-                            <p>programado</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <span class="card-icon">◉</span>
-                        <div>
-                            <small>MEMÓRIA</small>
-                            <strong>ATIVA</strong>
-                            <p>sistema online</p>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <!-- SYSTEM -->
-                <div class="system-panel">
-
-                    <div class="panel-title">
-                        <span>STATUS DO SISTEMA</span>
-                        <span class="live">LIVE</span>
-                    </div>
-
-                    <div class="system-grid">
-
-                        <div class="system-item">
-                            <span>CPU</span>
-                            <strong id="cpu">24%</strong>
-                            <div class="bar">
-                                <div id="cpuBar"></div>
-                            </div>
-                        </div>
-
-                        <div class="system-item">
-                            <span>RAM</span>
-                            <strong id="ram">42%</strong>
-                            <div class="bar">
-                                <div id="ramBar"></div>
-                            </div>
-                        </div>
+    </main>
 
-                        <div class="system-item">
-                            <span>DISCO</span>
-                            <strong>38%</strong>
-                            <div class="bar">
-                                <div style="width:38%"></div>
-                            </div>
-                        </div>
-
-                        <div class="system-item">
-                            <span>REDE</span>
-                            <strong>ONLINE</strong>
-                            <div class="network">
-                                ● ● ● ● ●
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- TASKS -->
-            <section id="tasks" class="page">
-
-                <div class="section-header">
-                    <h2>Minhas tarefas</h2>
-
-                    <button class="primary-button" onclick="addTask()">
-                        + Nova tarefa
-                    </button>
-                </div>
-
-                <div id="taskList" class="list">
-
-                    <div class="list-item">
-                        <div>
-                            <strong>Estudar programação</strong>
-                            <small>Prioridade alta</small>
-                        </div>
-
-                        <button onclick="completeTask(this)">
-                            ✓
-                        </button>
-                    </div>
-
-                    <div class="list-item">
-                        <div>
-                            <strong>Treinar</strong>
-                            <small>Hoje</small>
-                        </div>
-
-                        <button onclick="completeTask(this)">
-                            ✓
-                        </button>
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- NOTES -->
-            <section id="notes" class="page">
-
-                <div class="section-header">
-                    <h2>Notas</h2>
-
-                    <button class="primary-button" onclick="createNote()">
-                        + Nova nota
-                    </button>
-                </div>
-
-                <div id="notesList" class="notes-grid">
-
-                    <div class="note">
-                        <h3>Projeto JARVIS</h3>
-                        <p>
-                            Criar assistente pessoal com voz,
-                            memória e automações.
-                        </p>
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- CALENDAR -->
-            <section id="calendar" class="page">
-
-                <h2>Agenda</h2>
-
-                <div class="calendar-card">
-
-                    <h3>Hoje</h3>
-
-                    <div class="event">
-                        <span>19:00</span>
-                        <strong>Estudar programação</strong>
-                    </div>
-
-                    <div class="event">
-                        <span>21:00</span>
-                        <strong>Treino</strong>
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- WORKOUT -->
-            <section id="workout" class="page">
-
-                <h2>Treino</h2>
-
-                <div class="workout-card">
-
-                    <span class="small-label">
-                        TREINO DE HOJE
-                    </span>
-
-                    <h2>FORÇA</h2>
-
-                    <div class="exercise">
-                        <strong>Agachamento</strong>
-                        <span>4 × 10</span>
-                    </div>
-
-                    <div class="exercise">
-                        <strong>Supino</strong>
-                        <span>4 × 10</span>
-                    </div>
-
-                    <div class="exercise">
-                        <strong>Remada</strong>
-                        <span>4 × 12</span>
-                    </div>
-
-                    <button class="primary-button" onclick="startWorkout()">
-                        INICIAR TREINO
-                    </button>
-
-                </div>
-
-            </section>
-
-
-            <!-- MEMORY -->
-            <section id="memory" class="page">
-
-                <h2>Memória</h2>
-
-                <div class="memory-card">
-
-                    <h3>Memórias armazenadas</h3>
-
-                    <p>
-                        Nesta primeira versão a memória é apenas
-                        visual. Posteriormente será conectada ao
-                        banco de dados.
-                    </p>
-
-                    <div class="memory-item">
-                        Projeto atual: JARVIS AI
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- SYSTEM -->
-            <section id="system" class="page">
-
-                <h2>Sistema</h2>
-
-                <div class="system-panel">
-
-                    <div class="system-item">
-                        <span>SISTEMA OPERACIONAL</span>
-                        <strong>WINDOWS</strong>
-                    </div>
-
-                    <div class="system-item">
-                        <span>JARVIS CORE</span>
-                        <strong>ONLINE</strong>
-                    </div>
-
-                    <div class="system-item">
-                        <span>IA</span>
-                        <strong>AGUARDANDO API</strong>
-                    </div>
-
-                    <div class="system-item">
-                        <span>VOICE ENGINE</span>
-                        <strong>AGUARDANDO</strong>
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- SETTINGS -->
-            <section id="settings" class="page">
-
-                <h2>Configurações</h2>
-
-                <div class="settings-card">
-
-                    <label>
-                        Nome do assistente
-                        <input type="text" value="JARVIS">
-                    </label>
-
-                    <label>
-                        Voz
-                        <select>
-                            <option>Voz padrão</option>
-                            <option>Masculina</option>
-                            <option>Feminina</option>
-                        </select>
-                    </label>
-
-                    <label class="switch-line">
-                        Ativação por voz
-                        <input type="checkbox">
-                    </label>
-
-                </div>
-
-            </section>
-
-        </main>
-
-    </div>
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
+```
