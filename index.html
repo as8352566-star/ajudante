@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
 
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
 
     <title>Ajudante</title>
 
@@ -15,99 +15,78 @@
 
 <body>
 
-    <main class="app">
-
-        <!-- CABEÇALHO -->
+    <div class="app">
 
         <header class="header">
 
             <div class="brand">
 
-                <div class="status-orb"></div>
+                <div class="orb"></div>
 
                 <div>
                     <h1>AJUDANTE</h1>
-                    <span id="status">ONLINE</span>
+                    <span>ONLINE</span>
                 </div>
 
             </div>
 
-            <div class="clock" id="clock">
+            <div id="clock">
                 00:00
             </div>
 
         </header>
 
 
-        <!-- ÁREA DA CONVERSA -->
-
-        <section class="conversation" id="conversation">
+        <main id="conversation">
 
             <div class="message assistant">
 
-                <div class="message-name">
+                <div class="name">
                     AJUDANTE
                 </div>
 
                 <p>
-                    Olá. Estou pronto para conversar com você.
+                    Olá. Eu sou o Ajudante.
                 </p>
 
-                <span class="message-time">
-                    agora
-                </span>
+                <small>
+                    Estou pronto para conversar com você.
+                </small>
 
             </div>
 
-        </section>
+        </main>
 
 
-        <!-- ÁREA DE COMANDO -->
+        <div class="input-area">
 
-        <section class="input-area">
-
-            <button
-                class="icon-button"
-                id="microphone"
-                title="Microfone">
-
+            <button id="micButton">
                 🎙
-
             </button>
 
             <input
-                type="text"
                 id="messageInput"
-                placeholder="Fale comigo..."
+                type="text"
+                placeholder="Digite uma mensagem..."
                 autocomplete="off"
             >
 
-            <button
-                class="send-button"
-                id="sendButton">
-
+            <button id="sendButton">
                 ➤
-
             </button>
 
-        </section>
+        </div>
 
 
-        <!-- STATUS -->
+        <footer>
+            <span>SISTEMA</span>
 
-        <footer class="footer">
-
-            <span>
-                SISTEMA
-            </span>
-
-            <span id="systemStatus">
+            <span id="status">
                 Aguardando comando
             </span>
-
         </footer>
 
-    </main>
+    </div>
 
 
     <script src="script.js"></script>
