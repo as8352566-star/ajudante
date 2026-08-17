@@ -1,37 +1,30 @@
 ```javascript
-// ============================================
-// AJUDANTE
-// Primeira versão
-// ============================================
-
-
-// ELEMENTOS
-
 const input =
     document.getElementById("messageInput");
 
 const sendButton =
     document.getElementById("sendButton");
 
-const microphone =
-    document.getElementById("microphone");
+const micButton =
+    document.getElementById("micButton");
 
 const conversation =
     document.getElementById("conversation");
 
-const systemStatus =
-    document.getElementById("systemStatus");
+const status =
+    document.getElementById("status");
 
 
-// ============================================
+// ==========================================
 // RELÓGIO
-// ============================================
+// ==========================================
 
 function updateClock() {
 
     const now = new Date();
 
-    const time =
+    document.getElementById("clock")
+        .textContent =
         now.toLocaleTimeString(
             "pt-BR",
             {
@@ -39,9 +32,6 @@ function updateClock() {
                 minute: "2-digit"
             }
         );
-
-    document.getElementById("clock")
-        .textContent = time;
 }
 
 setInterval(updateClock, 1000);
@@ -49,14 +39,11 @@ setInterval(updateClock, 1000);
 updateClock();
 
 
-// ============================================
+// ==========================================
 // ADICIONAR MENSAGEM
-// ============================================
+// ==========================================
 
-function addMessage(
-    type,
-    text
-) {
+function addMessage(type, text) {
 
     const message =
         document.createElement("div");
@@ -73,29 +60,15 @@ function addMessage(
             : "VOCÊ";
 
 
-    const time =
-        new Date().toLocaleTimeString(
-            "pt-BR",
-            {
-                hour: "2-digit",
-                minute: "2-digit"
-            }
-        );
-
-
     message.innerHTML = `
 
-        <div class="message-name">
+        <div class="name">
             ${name}
         </div>
 
         <p>
             ${text}
         </p>
-
-        <span class="message-time">
-            ${time}
-        </span>
 
     `;
 
@@ -108,19 +81,19 @@ function addMessage(
 }
 
 
-// ============================================
+// ==========================================
 // RESPOSTA TEMPORÁRIA
-// ============================================
+// ==========================================
 
-function think(command) {
+function generateResponse(text) {
 
-    const text =
-        command.toLowerCase();
+    const message =
+        text.toLowerCase();
 
 
     if (
-        text.includes("oi") ||
-        text.includes("olá")
+        message.includes("oi") ||
+        message.includes("olá")
     ) {
 
         return "Olá. Estou aqui. Como posso ajudar?";
@@ -129,16 +102,16 @@ function think(command) {
 
 
     if (
-        text.includes("quem é você")
+        message.includes("quem é você")
     ) {
 
-        return "Eu sou o Ajudante. Esta é minha primeira versão.";
+        return "Eu sou o Ajudante. Ainda estou sendo construído.";
 
     }
 
 
     if (
-        text.includes("hora")
+        message.includes("hora")
     ) {
 
         return `Agora são ${new Date().toLocaleTimeString("pt-BR")}.`;
@@ -147,22 +120,22 @@ function think(command) {
 
 
     if (
-        text.includes("aprender")
+        message.includes("aprender")
     ) {
 
-        return "Ainda estou no início. Meu sistema de aprendizado será conectado nas próximas etapas.";
+        return "Meu sistema de aprendizado ainda será construído. Quero aprender através de conhecimento verificado e das suas correções.";
 
     }
 
 
-    return "Entendi. Ainda não possuo conhecimento suficiente para responder isso. Meu próximo passo será aprender a pesquisar e utilizar informações da internet.";
+    return "Recebi sua mensagem. Meu cérebro ainda está sendo construído. Em breve poderei compreender, pesquisar e aprender.";
 
 }
 
 
-// ============================================
-// ENVIAR
-// ============================================
+// ==========================================
+// ENVIAR MENSAGEM
+// ==========================================
 
 function sendMessage() {
 
@@ -182,14 +155,14 @@ function sendMessage() {
     input.value = "";
 
 
-    systemStatus.textContent =
+    status.textContent =
         "Processando";
 
 
     setTimeout(() => {
 
         const response =
-            think(text);
+            generateResponse(text);
 
 
         addMessage(
@@ -198,17 +171,16 @@ function sendMessage() {
         );
 
 
-        systemStatus.textContent =
+        status.textContent =
             "Aguardando comando";
 
     }, 500);
-
 }
 
 
-// ============================================
-// BOTÃO ENVIAR
-// ============================================
+// ==========================================
+// BOTÃO
+// ==========================================
 
 sendButton.addEventListener(
     "click",
@@ -216,9 +188,9 @@ sendButton.addEventListener(
 );
 
 
-// ============================================
+// ==========================================
 // ENTER
-// ============================================
+// ==========================================
 
 input.addEventListener(
     "keydown",
@@ -236,28 +208,21 @@ input.addEventListener(
 );
 
 
-// ============================================
+// ==========================================
 // MICROFONE
-// ============================================
+// ==========================================
 
-microphone.addEventListener(
+micButton.addEventListener(
     "click",
     function() {
 
-        systemStatus.textContent =
-            "Microfone será conectado em breve";
+        status.textContent =
+            "Microfone ainda não conectado";
 
         addMessage(
             "assistant",
-            "O sistema de voz ainda não foi conectado. Primeiro vamos construir meu cérebro."
+            "O sistema de voz será adicionado posteriormente."
         );
-
-        setTimeout(() => {
-
-            systemStatus.textContent =
-                "Aguardando comando";
-
-        }, 2000);
 
     }
 );
