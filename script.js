@@ -1,36 +1,47 @@
-// ==========================================
-// JARVIS AI - FRONTEND
-// ==========================================
+```javascript
+// ============================================
+// AJUDANTE
+// Primeira versão
+// ============================================
 
 
 // ELEMENTOS
 
-const commandInput = document.getElementById("commandInput");
-const sendButton = document.getElementById("sendButton");
-const micButton = document.getElementById("micButton");
+const input =
+    document.getElementById("messageInput");
 
-const chat = document.getElementById("chat");
-const jarvisState = document.getElementById("jarvis-state");
+const sendButton =
+    document.getElementById("sendButton");
+
+const microphone =
+    document.getElementById("microphone");
+
+const conversation =
+    document.getElementById("conversation");
+
+const systemStatus =
+    document.getElementById("systemStatus");
 
 
-// ==========================================
+// ============================================
 // RELÓGIO
-// ==========================================
+// ============================================
 
 function updateClock() {
 
     const now = new Date();
 
-    const time = now.toLocaleTimeString("pt-BR");
+    const time =
+        now.toLocaleTimeString(
+            "pt-BR",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
 
-    const date = now.toLocaleDateString("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-    });
-
-    document.getElementById("time").textContent = time;
-    document.getElementById("date").textContent = date;
+    document.getElementById("clock")
+        .textContent = time;
 }
 
 setInterval(updateClock, 1000);
@@ -38,375 +49,216 @@ setInterval(updateClock, 1000);
 updateClock();
 
 
-// ==========================================
-// ESTADO DO JARVIS
-// ==========================================
+// ============================================
+// ADICIONAR MENSAGEM
+// ============================================
 
-function setJarvisState(state) {
+function addMessage(
+    type,
+    text
+) {
 
-    jarvisState.textContent = state;
+    const message =
+        document.createElement("div");
 
-}
+    message.classList.add(
+        "message",
+        type
+    );
 
 
-// ==========================================
-// CHAT
-// ==========================================
+    const name =
+        type === "assistant"
+            ? "AJUDANTE"
+            : "VOCÊ";
 
-function addMessage(sender, text) {
 
-    const message = document.createElement("div");
+    const time =
+        new Date().toLocaleTimeString(
+            "pt-BR",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
 
-    message.className =
-        sender === "JARVIS"
-            ? "message jarvis-message"
-            : "message user-message";
 
     message.innerHTML = `
-        <div class="message-label">${sender}</div>
 
-        <p>${text}</p>
+        <div class="message-name">
+            ${name}
+        </div>
+
+        <p>
+            ${text}
+        </p>
 
         <span class="message-time">
-            ${new Date().toLocaleTimeString("pt-BR")}
+            ${time}
         </span>
+
     `;
 
-    chat.appendChild(message);
 
-    chat.scrollTop = chat.scrollHeight;
+    conversation.appendChild(message);
+
+
+    conversation.scrollTop =
+        conversation.scrollHeight;
 }
 
 
-// ==========================================
-// COMANDOS
-// ==========================================
+// ============================================
+// RESPOSTA TEMPORÁRIA
+// ============================================
 
-function processCommand(command) {
+function think(command) {
 
-    const text = command.toLowerCase();
-
-    setJarvisState("THINKING");
-
-    setTimeout(() => {
-
-        let response =
-            "Comando recebido. Ainda estou aprendendo essa função.";
-
-        if (text.includes("olá") || text.includes("oi")) {
-
-            response =
-                "Olá. Estou online e pronto para ajudá-lo.";
-
-        }
-
-        else if (text.includes("quem é você")) {
-
-            response =
-                "Sou o JARVIS, seu assistente pessoal. Esta é minha primeira versão.";
-
-        }
-
-        else if (text.includes("hora")) {
-
-            response =
-                `Agora são ${new Date().toLocaleTimeString("pt-BR")}.`;
-
-        }
-
-        else if (text.includes("treino")) {
-
-            response =
-                "Seu treino programado é um treino de força.";
-
-        }
-
-        else if (text.includes("tarefa")) {
-
-            response =
-                "Você possui 3 tarefas pendentes.";
-
-        }
-
-        else if (text.includes("nota")) {
-
-            response =
-                "O sistema de notas está disponível no menu lateral.";
-
-        }
-
-        else if (text.includes("status")) {
-
-            response =
-                "Todos os sistemas básicos estão funcionando.";
-
-        }
-
-        setJarvisState("SPEAKING");
-
-        addMessage("JARVIS", response);
-
-        setTimeout(() => {
-
-            setJarvisState("STANDBY");
-
-        }, 1500);
-
-    }, 700);
-}
+    const text =
+        command.toLowerCase();
 
 
-// ==========================================
-// ENVIAR COMANDO
-// ==========================================
+    if (
+        text.includes("oi") ||
+        text.includes("olá")
+    ) {
 
-function sendCommand() {
-
-    const command = commandInput.value.trim();
-
-    if (!command) return;
-
-    addMessage("VOCÊ", command);
-
-    commandInput.value = "";
-
-    processCommand(command);
-}
-
-
-sendButton.addEventListener("click", sendCommand);
-
-
-commandInput.addEventListener("keydown", function(event) {
-
-    if (event.key === "Enter") {
-
-        sendCommand();
+        return "Olá. Estou aqui. Como posso ajudar?";
 
     }
 
-});
+
+    if (
+        text.includes("quem é você")
+    ) {
+
+        return "Eu sou o Ajudante. Esta é minha primeira versão.";
+
+    }
 
 
-// ==========================================
-// MICROFONE
-// ==========================================
+    if (
+        text.includes("hora")
+    ) {
 
-micButton.addEventListener("click", function() {
+        return `Agora são ${new Date().toLocaleTimeString("pt-BR")}.`;
 
-    setJarvisState("LISTENING");
+    }
+
+
+    if (
+        text.includes("aprender")
+    ) {
+
+        return "Ainda estou no início. Meu sistema de aprendizado será conectado nas próximas etapas.";
+
+    }
+
+
+    return "Entendi. Ainda não possuo conhecimento suficiente para responder isso. Meu próximo passo será aprender a pesquisar e utilizar informações da internet.";
+
+}
+
+
+// ============================================
+// ENVIAR
+// ============================================
+
+function sendMessage() {
+
+    const text =
+        input.value.trim();
+
+
+    if (!text) return;
+
 
     addMessage(
-        "JARVIS",
-        "O reconhecimento de voz será conectado na próxima etapa."
+        "user",
+        text
     );
+
+
+    input.value = "";
+
+
+    systemStatus.textContent =
+        "Processando";
+
 
     setTimeout(() => {
 
-        setJarvisState("STANDBY");
-
-    }, 2000);
-
-});
+        const response =
+            think(text);
 
 
-// ==========================================
-// NAVEGAÇÃO
-// ==========================================
-
-const navItems =
-    document.querySelectorAll(".nav-item");
-
-const pages =
-    document.querySelectorAll(".page");
-
-const pageTitle =
-    document.getElementById("page-title");
+        addMessage(
+            "assistant",
+            response
+        );
 
 
-navItems.forEach(button => {
+        systemStatus.textContent =
+            "Aguardando comando";
 
-    button.addEventListener("click", function() {
+    }, 500);
 
-        const page = this.dataset.page;
-
-        if (!page) return;
-
-        navItems.forEach(item => {
-
-            item.classList.remove("active");
-
-        });
-
-        this.classList.add("active");
+}
 
 
-        pages.forEach(section => {
+// ============================================
+// BOTÃO ENVIAR
+// ============================================
 
-            section.classList.remove("active-page");
+sendButton.addEventListener(
+    "click",
+    sendMessage
+);
 
-        });
 
+// ============================================
+// ENTER
+// ============================================
 
-        const target =
-            document.getElementById(page);
+input.addEventListener(
+    "keydown",
+    function(event) {
 
-        if (target) {
+        if (
+            event.key === "Enter"
+        ) {
 
-            target.classList.add("active-page");
+            sendMessage();
 
         }
 
-
-        const titles = {
-
-            dashboard: "Dashboard",
-            tasks: "Tarefas",
-            notes: "Notas",
-            calendar: "Agenda",
-            workout: "Treinos",
-            memory: "Memória",
-            system: "Sistema",
-            settings: "Configurações"
-
-        };
-
-        pageTitle.textContent =
-            titles[page] || "JARVIS";
-
-    });
-
-});
+    }
+);
 
 
-// ==========================================
-// TAREFAS
-// ==========================================
+// ============================================
+// MICROFONE
+// ============================================
 
-function addTask() {
+microphone.addEventListener(
+    "click",
+    function() {
 
-    const title =
-        prompt("Nome da tarefa:");
+        systemStatus.textContent =
+            "Microfone será conectado em breve";
 
-    if (!title) return;
+        addMessage(
+            "assistant",
+            "O sistema de voz ainda não foi conectado. Primeiro vamos construir meu cérebro."
+        );
 
-    const list =
-        document.getElementById("taskList");
+        setTimeout(() => {
 
-    const item =
-        document.createElement("div");
+            systemStatus.textContent =
+                "Aguardando comando";
 
-    item.className = "list-item";
+        }, 2000);
 
-    item.innerHTML = `
-        <div>
-            <strong>${title}</strong>
-            <small>Nova tarefa</small>
-        </div>
-
-        <button onclick="completeTask(this)">
-            ✓
-        </button>
-    `;
-
-    list.appendChild(item);
-
-}
-
-
-function completeTask(button) {
-
-    const item =
-        button.parentElement;
-
-    item.style.opacity = "0.4";
-
-    button.textContent = "✓";
-
-}
-
-
-// ==========================================
-// NOTAS
-// ==========================================
-
-function createNote() {
-
-    const title =
-        prompt("Título da nota:");
-
-    if (!title) return;
-
-    const content =
-        prompt("Conteúdo da nota:");
-
-    if (!content) return;
-
-    const note =
-        document.createElement("div");
-
-    note.className = "note";
-
-    note.innerHTML = `
-        <h3>${title}</h3>
-        <p>${content}</p>
-    `;
-
-    document
-        .getElementById("notesList")
-        .appendChild(note);
-
-}
-
-
-// ==========================================
-// TREINO
-// ==========================================
-
-function startWorkout() {
-
-    addMessage(
-        "JARVIS",
-        "Treino iniciado. Sistema de cronômetro será conectado posteriormente."
-    );
-
-    setJarvisState("EXECUTING");
-
-    setTimeout(() => {
-
-        setJarvisState("STANDBY");
-
-    }, 2000);
-
-}
-
-
-// ==========================================
-// SIMULAÇÃO DO SISTEMA
-// ==========================================
-
-function updateSystem() {
-
-    const cpu =
-        Math.floor(Math.random() * 40) + 15;
-
-    const ram =
-        Math.floor(Math.random() * 30) + 30;
-
-    document.getElementById("cpu").textContent =
-        `${cpu}%`;
-
-    document.getElementById("ram").textContent =
-        `${ram}%`;
-
-    document.getElementById("cpuBar").style.width =
-        `${cpu}%`;
-
-    document.getElementById("ramBar").style.width =
-        `${ram}%`;
-
-}
-
-setInterval(updateSystem, 3000);
-
-updateSystem();
+    }
+);
+```
